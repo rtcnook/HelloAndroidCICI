@@ -1,0 +1,22 @@
+name: HelloAndroidBuild
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+jobs:
+  builds:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.1
+      - name: Setup Java JDK
+        uses: actions/setup-java@v5.1.0
+      - name: Build with Gradle
+        uses: gradle/actions@v5.0.0
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v6.0.0
+        with:
+          name: AndroidCICD.apk
+          path: app/build/outputs/apk/app-debug.apk
